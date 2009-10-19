@@ -1,13 +1,12 @@
-begin
-  # If the json gem is available, use it
-  require "json/add/rails"
-rescue MissingSourceFile
-  # Otherwise wrap the ActiveSupport JSON implementation for our simple use case
+# Use ActiveSupport's version of JSON if available
+if Object.const_defined?('ActiveSupport') && ActiveSupport.const_defined?('JSON')
   class JSON
     def self.parse(i)
       ActiveSupport::JSON.decode(i)
     end
   end
+else
+  require 'json/add/rails'
 end
 
 class Contacts
@@ -39,7 +38,7 @@ class Contacts
       
       cookies = remove_cookie("GMAIL_LOGIN", cookies)
 
-      if data.index("Username and password do not match")
+      if data.index("Username and password do not match") || data.index("New to Gmail? It's free and easy")
         raise AuthenticationError, "Username and password do not match"
       elsif data.index("The username or password you entered is incorrect")
         raise AuthenticationError, "Username and password do not match"
