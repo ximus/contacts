@@ -24,4 +24,11 @@ class HotmailContactImporterTest < ContactImporterTestCase
       assert contacts.include?(contact), "Could not find: #{contact.inspect} in #{contacts.inspect}"
     end
   end
+  # Since the hotmail scraper doesn't read names, test email
+  def test_fetch_email
+    contacts = Contacts.new(:hotmail, @account.username, @account.password).contacts
+    @account.contacts.each do |contact|
+      assert contacts.any?{|book_contact| book_contact.last == contact.last }, "Could not find: #{contact.inspect} in #{contacts.inspect}"
+    end
+  end
 end
