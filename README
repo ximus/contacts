@@ -1,12 +1,12 @@
 == Welcome to Contacts
 
-Contacts is a universal interface to grab contact list information from various providers including Hotmail, Gmail and Yahoo.
+Contacts is a universal interface to grab contact list information from various providers including Hotmail, AOL, Gmail and Yahoo.
 
 == Download
 
 * gem install contacts
-* http://rubyforge.org/projects/contacts
-* svn co svn://rubyforge.org/var/svn/contacts
+* http://github.com/cardmagic/contacts
+* git clone git://github.com/cardmagic/contacts.git
 
 == Background
 
@@ -40,6 +40,7 @@ See the examples/ directory.
 * Tony Targonski from GigPark (mailto:tony@gigpark.com) - http://gigpark.com
 * Waheed Barghouthi from Watwet (mailto:waheed.barghouthi@gmail.com) - http://watwet.com
 * Glenn Sidney from Glenn Fu (mailto:glenn@glennfu.com) - http://glennfu.com
+* Brian McQuay from Onomojo (mailto:brian@onomojo.com) - http://onomojo.com
 
 This library is released under the terms of the BSD.
 

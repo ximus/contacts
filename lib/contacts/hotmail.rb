@@ -39,7 +39,7 @@ class Contacts
       elsif cookies == ""
         raise ConnectionError, PROTOCOL_ERROR
       end
-      
+
       data, resp, cookies, forward = get("http://mail.live.com/mail", cookies)
       until forward.nil?
         data, resp, cookies, forward, old_url = get(forward, cookies, old_url) + [forward]
