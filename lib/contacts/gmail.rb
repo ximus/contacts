@@ -1,14 +1,3 @@
-# Use ActiveSupport's version of JSON if available
-if Object.const_defined?('ActiveSupport') && ActiveSupport.const_defined?('JSON')
-  class JSON
-    def self.parse(i)
-      ActiveSupport::JSON.decode(i)
-    end
-  end
-else
-  require 'json/add/rails'
-end
-
 class Hash
   def to_query_string
     u = ERB::Util.method(:u)

@@ -1,14 +1,3 @@
-# Use ActiveSupport's version of JSON if available
-if Object.const_defined?('ActiveSupport') && ActiveSupport.const_defined?('JSON') && ActiveSupport::JSON.is_a?(Class)
-  class JSON
-    def self.parse(i)
-      ActiveSupport::JSON.decode(i)
-    end
-  end
-else
-  require 'json/add/rails'
-end
-
 class Contacts
   class Yahoo < Base
     URL                 = "http://mail.yahoo.com/"
