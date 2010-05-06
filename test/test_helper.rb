@@ -3,6 +3,7 @@ $LOAD_PATH.unshift(dir + "/../lib/")
 require 'test/unit'
 require 'contacts'
 
+
 class ContactImporterTestCase < Test::Unit::TestCase
   # Add more helper methods to be used by all tests here...
   def default_test

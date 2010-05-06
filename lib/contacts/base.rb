@@ -5,21 +5,24 @@ require "uri"
 require "zlib"
 require "stringio"
 require "thread"
+require "erb"
 
 class Contacts
   TYPES = {}
-  VERSION = "1.0.13"
+  VERSION = "1.2.3"
   
   class Base
-    def initialize(login, password)
-      @login    = login
+    def initialize(login, password, options={})
+      @login = login
       @password = password
+      @captcha_token = options[:captcha_token]
+      @captcha_response = options[:captcha_response]
       @connections = {}
       connect
     end
     
     def connect
-      raise AuthenticationError, "Login and password must not be nil, login: #{@login.inspect}, password: #{@password.inspect}" if @login.nil? || @password.nil?
+      raise AuthenticationError, "Login and password must not be nil, login: #{@login.inspect}, password: #{@password.inspect}" if @login.nil? || @login.empty? || @password.nil? || @password.empty?
       real_connect
     end
     
@@ -92,10 +95,14 @@ class Contacts
       http
     end
     
+    def cookie_hash_from_string(cookie_string)
+      cookie_string.split(";").map{|i|i.split("=", 2).map{|j|j.strip}}.inject({}){|h,i|h[i[0]]=i[1];h}
+    end
+    
     def parse_cookies(data, existing="")
       return existing if data.nil?
 
-      cookies = existing.split(";").map{|i|i.split("=", 2).map{|j|j.strip}}.inject({}){|h,i|h[i[0]]=i[1];h}
+      cookies = cookie_hash_from_string(existing)
       
       data.gsub!(/ ?[\w]+=EXPIRED;/,'')
       data.gsub!(/ ?expires=(.*?, .*?)[;,$]/i, ';')
@@ -162,14 +169,14 @@ class Contacts
     
     def uncompress(resp, data)
       case resp.response['content-encoding']
-      when 'gzip':
+      when 'gzip'
         gz = Zlib::GzipReader.new(StringIO.new(data))
         data = gz.read
         gz.close
         resp.response['content-encoding'] = nil
       # FIXME: Not sure what Hotmail was feeding me with their 'deflate',
       #        but the headers definitely were not right
-      when 'deflate':
+      when 'deflate'
         data = Zlib::Inflate.inflate(data)
         resp.response['content-encoding'] = nil
       end
@@ -190,18 +197,18 @@ class Contacts
   class TypeNotFound < ContactsError
   end
   
-  def self.new(type, login, password)
+  def self.new(type, login, password, options={})
     if TYPES.include?(type.to_s.intern)
-      TYPES[type.to_s.intern].new(login, password)
+      TYPES[type.to_s.intern].new(login, password, options)
     else
       raise TypeNotFound, "#{type.inspect} is not a valid type, please choose one of the following: #{TYPES.keys.inspect}"
     end
   end
   
-  def self.guess(login, password)
+  def self.guess(login, password, options={})
     TYPES.inject([]) do |a, t|
       begin
-        a + t[1].new(login, password).contacts
+        a + t[1].new(login, password, options).contacts
       rescue AuthenticationError
         a
       end
