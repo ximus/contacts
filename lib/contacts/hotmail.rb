@@ -31,7 +31,7 @@ class Contacts
       until cookies =~ /; PPAuth=/ || forward.nil?
         data, resp, cookies, forward, old_url = get(forward, cookies, old_url) + [forward]
       end
-      
+
       if data.index("The e-mail address or password is incorrect")
         raise AuthenticationError, "Username and password do not match"
       elsif data != ""
@@ -39,7 +39,7 @@ class Contacts
       elsif cookies == ""
         raise ConnectionError, PROTOCOL_ERROR
       end
-            
+
       data, resp, cookies, forward = get("http://mail.live.com/mail", cookies)
       until forward.nil?
         data, resp, cookies, forward, old_url = get(forward, cookies, old_url) + [forward]
