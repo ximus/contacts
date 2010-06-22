@@ -76,7 +76,7 @@ class Contacts
               "Cookie" => @cookies,
               "X-Requested-With" => "XMLHttpRequest",
               "Referer" => address_book_url
-            )
+              )
 
             if resp.code_type != Net::HTTPOK
             raise ConnectionError, self.class.const_get(:PROTOCOL_ERROR)
@@ -94,13 +94,12 @@ class Contacts
       @contacts ||= []
       if data =~ /var InitialContacts = (\[.*?\]);/
         @contacts += Contacts.parse_json($1).select{|contact|!contact["email"].to_s.empty?}.map{|contact|[contact["contactName"].gsub(/\s{2}/, ' '), contact["email"]]}
-      elsif data =~ /^\{"response":/
+      elsif data =~ /^\{\"response\":/
         @contacts +=  Contacts.parse_json(data)["response"]["ResultSet"]["Contacts"].to_a.select{|contact|!contact["email"].to_s.empty?}.map{|contact|[contact["contactName"], contact["email"]]}
       else
         @contacts
       end
     end
-    
   end
 
   TYPES[:yahoo] = Yahoo

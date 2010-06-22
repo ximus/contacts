@@ -22,10 +22,10 @@ $:.unshift(File.dirname(__FILE__)+"/contacts/")
 
 require 'rubygems'
 
+require 'json_picker'
 require 'base'
 require 'gmail'
 require 'hotmail'
 require 'aol'
 require 'yahoo'
 require 'plaxo'
-require 'json_picker'

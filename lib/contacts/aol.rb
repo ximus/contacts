@@ -143,9 +143,7 @@ class Contacts
 
     def h_to_query_string(hash)
       u = ERB::Util.method(:u)
-      hash.map { |k, v|
-        u.call(k) + "=" + u.call(v)
-      }.join("&")
+      hash.map{ |k, v| u.call(k) + "=" + u.call(v) }.join("&")
     end
   end
   TYPES[:aol] = Aol
