@@ -2,7 +2,7 @@ require 'hpricot'
 require 'csv'
 
 class Contacts
-  class Aol < Base
+  class AolImporter < Base
     URL                 = "http://www.aol.com/"
     LOGIN_URL           = "https://my.screenname.aol.com/_cqr/login/login.psp"
     LOGIN_REFERER_URL   = "http://webmail.aol.com/"
@@ -146,5 +146,5 @@ class Contacts
       hash.map{ |k, v| u.call(k) + "=" + u.call(v) }.join("&")
     end
   end
-  TYPES[:aol] = Aol
+  TYPES[:aol] = AolImporter
 end
