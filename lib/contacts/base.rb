@@ -8,7 +8,6 @@ require "thread"
 require "erb"
 
 class Contacts
-  TYPES = {}
   VERSION = "1.2.3"
   
   class Base

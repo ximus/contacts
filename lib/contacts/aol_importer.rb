@@ -146,5 +146,5 @@ class Contacts
       hash.map{ |k, v| u.call(k) + "=" + u.call(v) }.join("&")
     end
   end
-  TYPES[:aolImporter] = AolImporter
+  # TYPES[:aolImporter] = AolImporter
 end

@@ -29,3 +29,7 @@ require 'hotmail'
 require 'yahoo'
 require 'plaxo'
 require 'aol_importer'
+
+class Contacts
+  TYPES = {:hotmail => Hotmail, :gmail => Gmail, :aolImporter => AolImporter, :yahoo => Yahoo, :plaxo => Plaxo}
+end
