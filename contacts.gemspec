@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = "contacts"
-  s.version = "1.2.3"
-  s.date = "2010-01-20"
+  s.version = "1.2.3.1"
+  s.date = "2010-06-22"
   s.summary = "A universal interface to grab contact list information from various providers including Yahoo, AOL, Gmail, Hotmail, and Plaxo."
   s.email = "lucas@rufy.com"
   s.homepage = "http://github.com/cardmagic/contacts"
@@ -11,5 +11,6 @@ Gem::Specification.new do |s|
   s.files = ["LICENSE", "Rakefile", "README", "examples/grab_contacts.rb", "lib/contacts.rb", "lib/contacts/base.rb", "lib/contacts/json_picker.rb", "lib/contacts/gmail.rb", "lib/contacts/aol_importer.rb", "lib/contacts/hotmail.rb", "lib/contacts/plaxo.rb", "lib/contacts/yahoo.rb"]
   s.add_dependency("json", ">= 1.1.1")
   s.add_dependency('gdata', '>= 1.1.1')
+  s.add_dependency('hpricot')
 end
 
