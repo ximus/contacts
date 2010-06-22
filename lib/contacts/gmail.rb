@@ -28,5 +28,5 @@ class Contacts
       raise AuthenticationError, "Username or password are incorrect"
     end
   end
-  # TYPES[:gmail] = Gmail
+  TYPES[:gmail] = Gmail
 end

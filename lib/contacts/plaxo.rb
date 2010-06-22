@@ -55,7 +55,7 @@ class Contacts
 
   end # Plaxo
   
-  # TYPES[:plaxo] = Plaxo
+  TYPES[:plaxo] = Plaxo
   
 end # Contacts
 

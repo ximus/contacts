@@ -117,5 +117,5 @@ class Contacts
       "http://mpeople.live.com/default.aspx?pg=#{index}"
     end
   end
-  # TYPES[:hotmail] = Hotmail
+  TYPES[:hotmail] = Hotmail
 end

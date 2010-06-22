@@ -102,5 +102,5 @@ class Contacts
     end
   end
 
-  # TYPES[:yahoo] = Yahoo
+  TYPES[:yahoo] = Yahoo
 end
