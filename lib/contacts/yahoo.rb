@@ -89,8 +89,6 @@ class Contacts
         @contacts
       end
     end
-
-  private
     
     def parse(data, options={})
       @contacts ||= []

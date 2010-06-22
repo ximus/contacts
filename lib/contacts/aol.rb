@@ -1,6 +1,7 @@
+require 'hpricot'
+require 'csv'
+
 class Contacts
-  require 'hpricot'
-  require 'csv'
   class Aol < Base
     URL                 = "http://www.aol.com/"
     LOGIN_URL           = "https://my.screenname.aol.com/_cqr/login/login.psp"
@@ -11,6 +12,45 @@ class Contacts
     CONTACT_LIST_URL    = "http://webmail.aol.com/#{AOL_NUM}/aim-2/en-us/Lite/ContactList.aspx?folder=Inbox&showUserFolders=False"
     CONTACT_LIST_CSV_URL = "http://webmail.aol.com/#{AOL_NUM}/aim-2/en-us/Lite/ABExport.aspx?command=all"
     PROTOCOL_ERROR      = "AOL has changed its protocols, please upgrade this library first. If that does not work, dive into the code and submit a patch at http://github.com/cardmagic/contacts"
+
+    def contacts
+      postdata = {
+        "file" => 'contacts',
+        "fileType" => 'csv'
+      }
+
+      return @contacts if @contacts
+      if connected?
+        data, resp, cookies, forward, old_url = get(CONTACT_LIST_URL, @cookies, CONTACT_LIST_URL) + [CONTACT_LIST_URL]
+
+        until forward.nil?
+          data, resp, cookies, forward, old_url = get(forward, cookies, old_url) + [forward]
+        end
+
+        if resp.code_type != Net::HTTPOK
+          raise ConnectionError, self.class.const_get(:PROTOCOL_ERROR)
+        end
+
+        # parse data and grab <input name="user" value="8QzMPIAKs2" type="hidden">
+        doc = Hpricot(data)
+        (doc/:input).each do |input|
+          postdata["user"] = input.attributes["value"] if input.attributes["name"] == "user"
+        end
+
+        data, resp, cookies, forward, old_url = get(CONTACT_LIST_CSV_URL, @cookies, CONTACT_LIST_URL) + [CONTACT_LIST_URL]
+
+        until forward.nil?
+          data, resp, cookies, forward, old_url = get(forward, cookies, old_url) + [forward]
+        end
+
+        if data.include?("error.gif")
+          raise AuthenticationError, "Account invalid"
+        end
+
+        parse data
+      end
+    end
+
 
     def real_connect
 
@@ -92,44 +132,6 @@ class Contacts
       @cookies = cookies
     end
 
-    def contacts
-      postdata = {
-        "file" => 'contacts',
-        "fileType" => 'csv'
-      }
-
-      return @contacts if @contacts
-      if connected?
-        data, resp, cookies, forward, old_url = get(CONTACT_LIST_URL, @cookies, CONTACT_LIST_URL) + [CONTACT_LIST_URL]
-
-        until forward.nil?
-          data, resp, cookies, forward, old_url = get(forward, cookies, old_url) + [forward]
-        end
-
-        if resp.code_type != Net::HTTPOK
-          raise ConnectionError, self.class.const_get(:PROTOCOL_ERROR)
-        end
-
-        # parse data and grab <input name="user" value="8QzMPIAKs2" type="hidden">
-        doc = Hpricot(data)
-        (doc/:input).each do |input|
-          postdata["user"] = input.attributes["value"] if input.attributes["name"] == "user"
-        end
-
-        data, resp, cookies, forward, old_url = get(CONTACT_LIST_CSV_URL, @cookies, CONTACT_LIST_URL) + [CONTACT_LIST_URL]
-
-        until forward.nil?
-          data, resp, cookies, forward, old_url = get(forward, cookies, old_url) + [forward]
-        end
-
-        if data.include?("error.gif")
-          raise AuthenticationError, "Account invalid"
-        end
-
-        parse data
-      end
-    end
-  private
 
     def parse(data, options={})
       data = CSV::Reader.parse(data)
