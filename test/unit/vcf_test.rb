@@ -1,4 +1,5 @@
-require 'test_helper'
+dir = File.dirname(__FILE__)
+require "#{dir}/../test_helper"
 
 class VcfTest < ContactImporterTestCase
   context 'An instance of Vcf' do
