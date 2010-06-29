@@ -21,5 +21,5 @@ class Contacts
       contacts
     end
   end
-  TYPES[:vcf] = Vcf
+  FILETYPES[:vcf] = Vcf
 end

@@ -9,6 +9,7 @@ require "erb"
 
 class Contacts
   TYPES = {}
+  FILETYPES = {}
   VERSION = "1.2.3"
   
   class Base
@@ -202,6 +203,14 @@ class Contacts
       TYPES[type.to_s.intern].new(login, password, options)
     else
       raise TypeNotFound, "#{type.inspect} is not a valid type, please choose one of the following: #{TYPES.keys.inspect}"
+    end
+  end
+  
+  def self.new(type, file)
+    if FILETYPES.include?(type.to_s.intern)
+      FILETYPES[type.to_s.intern].new(file)
+    else
+      raise TypeNotFound, "#{type.inspect} is not a valid file type, please choose one of the following: #{FILETYPES.keys.inspect}"
     end
   end
   
