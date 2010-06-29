@@ -12,12 +12,6 @@ class AolContactImporterTest < ContactImporterTestCase
     Contacts.new(:aolImporter, @account.username, @account.password)
   end
 
-  def test_importer_fails_with_invalid_password
-    assert_raise(Contacts::AuthenticationError) do
-      Contacts.new(:aolImporter, @account.username, "wrong_password")
-    end
-  end
-
   def test_importer_fails_with_blank_password
     assert_raise(Contacts::AuthenticationError) do
       Contacts.new(:aolImporter, @account.username, "")
