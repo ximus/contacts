@@ -8,7 +8,7 @@ class Contacts
     def contacts
       contacts = Array.new
       i = 0
-      @contact_file.each_line do |line|
+      @contact_file.each do |line|
         contacts[i] = Array.new unless contacts[i]
         if line.match(/FN:/)
           contacts[i] << line.gsub(/FN:/, '').strip
