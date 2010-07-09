@@ -6,7 +6,7 @@ class Contacts
     def initialize(file)
       @contact_file = Array.new
       file.each do |line|
-        @contact_file << FasterCSV.read(line)
+        @contact_file << FasterCSV.parse(line)
       end
       @full_name = false
       @header_indexes = Hash.new
