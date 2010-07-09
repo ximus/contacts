@@ -4,7 +4,7 @@ class Contacts
   class Outlook < Base
     
     def initialize(file)
-      @contact_file = FasterCSV.read(file)
+      @contact_file = file
       @full_name = false
       @header_indexes = Hash.new
       @header_indexes[:email_address] = Array.new
