@@ -2,7 +2,7 @@ class Contacts
   class Vcf < Base
     
     def initialize(file)
-      @contact_file = File.open(file, "r")
+      @contact_file = file
     end
     
     def contacts
