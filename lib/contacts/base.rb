@@ -198,7 +198,10 @@ class Contacts
   class TypeNotFound < ContactsError
   end
   
-  def self.new(type, login, password="", options={})
+  def self.new(type, login, password="", secret_key="", options={})
+    if !password.blank? && !secret_key.blank?
+      password = Encryptor.decrypt(password, :key => secret_key)
+    end
     if TYPES.include?(type.to_s.intern)
       TYPES[type.to_s.intern].new(login, password, options)
     elsif FILETYPES.include?(type.to_s.intern)
