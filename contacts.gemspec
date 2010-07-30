@@ -11,7 +11,6 @@ Gem::Specification.new do |s|
   s.add_dependency("json", ">= 1.1.1")
   s.add_dependency('gdata', '>= 1.1.1')
   s.add_dependency('hpricot')
-  s.add_dependency('fastercsv')
   s.add_dependency('encryptor')
 end
 
