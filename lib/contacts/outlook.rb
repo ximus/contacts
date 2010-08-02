@@ -52,5 +52,7 @@ class Contacts
     end
     
   end
-  FILETYPES[:outlook] = Outlook
+  
+  private
+    FILETYPES[:outlook] = Outlook
 end
