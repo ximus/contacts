@@ -199,7 +199,7 @@ class Contacts
   end
   
   def self.new(type, login, password="", secret_key="", options={})
-    if !password.blank? && !secret_key.blank?
+    if !password.nil? && password != ''  && !secret_key.nil? && secret_key != ''
       password = Encryptor.decrypt(URI.unescape(password), :key => secret_key)
     end
     if TYPES.include?(type.to_s.intern)

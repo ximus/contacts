@@ -106,6 +106,7 @@ class Contacts
           unless contact[1].nil?
             # Only return contacts with email addresses
             contact[1] = CGI::unescape(contact[1])
+            contact[1] = contact[1].gsub(/&amp;ru.*/, '').gsub(/%40/, '@')
             @contacts << contact
           end
         end
