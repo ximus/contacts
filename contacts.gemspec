@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
-  s.name = "contacts"
-  s.version = "1.4"
+  s.name = "contacts19"
+  s.version = "1.4.1"
   s.date = "2010-09-20"
   s.summary = "A universal interface to grab contact list information from various providers including Outlook, Address Book, Yahoo, AOL, Gmail, Hotmail, and Plaxo."
   s.homepage = "http://github.com/paperlesspost/contacts"
@@ -13,4 +13,3 @@ Gem::Specification.new do |s|
   s.add_dependency('hpricot')
   s.add_dependency('encryptor')
 end
-
