@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = "contacts"
-  s.version = "1.3"
-  s.date = "2010-06-29"
+  s.version = "1.4"
+  s.date = "2010-09-20"
   s.summary = "A universal interface to grab contact list information from various providers including Outlook, Address Book, Yahoo, AOL, Gmail, Hotmail, and Plaxo."
   s.homepage = "http://github.com/paperlesspost/contacts"
   s.description = "A universal interface to grab contact list information from various providers including Outlook, Address Book, Yahoo, AOL, Gmail, Hotmail, and Plaxo."
