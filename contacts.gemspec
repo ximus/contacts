@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name = "contacts19"
+  s.name = "contacts"
   s.version = "1.4.1"
   s.date = "2010-09-20"
   s.summary = "A universal interface to grab contact list information from various providers including Outlook, Address Book, Yahoo, AOL, Gmail, Hotmail, and Plaxo."
