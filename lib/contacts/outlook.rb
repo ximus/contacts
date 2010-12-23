@@ -2,10 +2,11 @@ require 'csv'
 
 class Contacts
   class Outlook < Base
-    
+
     def initialize(file)
       @contact_file = Array.new
-      file.each do |line|
+      file = file.respond_to?(:read) ? file.read : file
+      file.each_line do |line|
         @contact_file << CSV.parse(line)[0]
       end
       @full_name = false
@@ -29,11 +30,11 @@ class Contacts
         end
       end
     end
-    
+
     def contacts
 
       contacts = Array.new
-      
+
       @contact_file.each_with_index do |line, i|
         contacts[i] = Array.new unless contacts[i]
         if(@full_name)
@@ -47,12 +48,12 @@ class Contacts
           end
         end
       end
-      
+
       contacts
     end
-    
+
   end
-  
+
   private
     FILETYPES[:outlook] = Outlook
 end
