@@ -1,5 +1,6 @@
 dir = File.dirname(__FILE__)
-require "#{dir}/../test_helper"
+require 'ruby-debug'
+require File.join(".", dir, "..", "test_helper.rb")
 require 'contacts'
 
 class AolContactImporterTest < ContactImporterTestCase

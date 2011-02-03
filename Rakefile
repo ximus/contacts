@@ -4,7 +4,7 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'rake/gempackagetask'
 require 'rake/contrib/rubyforgepublisher'
-require 'lib/contacts'
+require File.join(File.dirname(__FILE__), 'lib', 'contacts')
 
 PKG_VERSION = Contacts::VERSION
 

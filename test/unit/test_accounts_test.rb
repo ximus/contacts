@@ -1,5 +1,5 @@
 dir = File.dirname(__FILE__)
-require "#{dir}/../test_helper"
+require File.join(".", dir, "..", "test_helper.rb")
 
 class TestAccountsTest < ContactImporterTestCase
   def test_test_accounts_loads_data_from_example_accounts_file

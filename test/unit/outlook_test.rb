@@ -1,5 +1,5 @@
 dir = File.dirname(__FILE__)
-require "#{dir}/../test_helper"
+require File.join(".", dir, "..", "test_helper.rb")
 
 class OutlookTest < ContactImporterTestCase
   context 'An instance of Outlook' do

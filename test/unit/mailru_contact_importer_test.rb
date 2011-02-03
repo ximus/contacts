@@ -1,5 +1,5 @@
 dir = File.dirname(__FILE__)
-require "#{dir}/../test_helper"
+require File.join(".", dir, "..", "test_helper.rb")
 require 'contacts'
 
 class MailruContactImporterTest < ContactImporterTestCase
