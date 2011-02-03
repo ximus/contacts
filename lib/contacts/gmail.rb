@@ -27,9 +27,6 @@ class Contacts
     rescue GData::Client::AuthorizationError => e
       raise AuthenticationError, "Username or password are incorrect"
     end
-    
-    private
-    
-    TYPES[:gmail] = Gmail
   end
+  TYPES[:gmail] = Gmail
 end

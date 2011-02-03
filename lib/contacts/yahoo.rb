@@ -98,7 +98,6 @@ class Contacts
       end if data =~ /^\{"response":/
       @contacts
     end
-
   end
 
   TYPES[:yahoo] = Yahoo
