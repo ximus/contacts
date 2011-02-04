@@ -1,91 +1,28 @@
 require 'rubygems'
+require 'bundler'
+begin
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  $stderr.puts e.message
+  $stderr.puts "Run `bundle install` to install missing gems"
+  exit e.status_code
+end
 require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
-require 'rake/gempackagetask'
-require 'rake/contrib/rubyforgepublisher'
-require File.join(File.dirname(__FILE__), 'lib', 'contacts')
 
-PKG_VERSION = Contacts::VERSION
-
-PKG_FILES = FileList[
-    "lib/**/*", "bin/*", "test/**/*", "[A-Z]*", "Rakefile", "doc/**/*", "examples/**/*"
-] - ["test/accounts.yml"]
-
-desc "Default Task"
-task :default => [ :test ]
-
-# Run the unit tests
-desc "Run all unit tests"
-Rake::TestTask.new("test") { |t|
-  t.libs << "lib"
-  t.pattern = 'test/*/*_test.rb'
-  t.verbose = true
-}
-
-# Make a console, useful when working on tests
-desc "Generate a test console"
-task :console do
-   verbose( false ) { sh "irb -I lib/ -r 'contacts'" }
+require 'jeweler'
+Jeweler::Tasks.new do |gem|
+  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
+  gem.name = "contacts"
+  gem.homepage = "http://github.com/notch8/contacts"
+  gem.license = "MIT"
+  gem.summary = %Q{A universal interface to grab contact list information from various providers including Outlook, Address Book, Yahoo, AOL, Gmail, Hotmail, and Plaxo.}
+  gem.description = %Q{A universal interface to grab contact list information from various providers including Outlook, Address Book, Yahoo, AOL, Gmail, Hotmail, and Plaxo.}
+  gem.email = "rob@notch8.com"
+  gem.authors = ["Rob Kaufman"]
+  # Include your dependencies below. Runtime dependencies are required when using your gem,
+  # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
+  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
+  #  gem.add_development_dependency 'rspec', '> 1.2.3'
 end
+Jeweler::RubygemsDotOrgTasks.new
 
-# Genereate the RDoc documentation
-desc "Create documentation"
-Rake::RDocTask.new("doc") { |rdoc|
-  rdoc.title = "Contact List - ridiculously easy contact list information from various providers including Yahoo, Gmail, and Hotmail"
-  rdoc.rdoc_dir = 'doc'
-  rdoc.rdoc_files.include('README')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-}
-
-# Genereate the package
-spec = Gem::Specification.new do |s|
-
-  #### Basic information.
-
-  s.name = 'contacts19'
-  s.version = PKG_VERSION
-  s.summary = <<-EOF
-   Ridiculously easy contact list information from various providers including Yahoo, Gmail, and Hotmail
-  EOF
-  s.description = <<-EOF
-   Ridiculously easy contact list information from various providers including Yahoo, Gmail, and Hotmail
-  EOF
-
-  #### Which files are to be included in this gem?  Everything!  (Except CVS directories.)
-
-  s.files = PKG_FILES
-
-  #### Load-time details: library and application (you will need one or both).
-
-  s.require_path = 'lib'
-  s.autorequire = 'contacts'
-
-  s.add_dependency('json', '>= 0.4.1')
-  s.add_dependency('gdata', '= 1.1.1')
-  s.requirements << "A json parser, the gdata ruby gem"
-
-  #### Documentation and testing.
-
-  s.has_rdoc = true
-
-  #### Author and project details.
-
-  s.author = "Lucas Carlson"
-  s.email = "lucas@rufy.com"
-  s.homepage = "http://rubyforge.org/projects/contacts"
-end
-
-Rake::GemPackageTask.new(spec) do |pkg|
-  pkg.need_zip = true
-  pkg.need_tar = true
-end
-
-desc "Report code statistics (KLOCs, etc) from the application"
-task :stats do
-  require 'code_statistics'
-  CodeStatistics.new(
-    ["Library", "lib"],
-    ["Units", "test"]
-  ).to_s
-end
