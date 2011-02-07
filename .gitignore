@@ -4,3 +4,4 @@ test/accounts.yml
 nbproject/
 .rvmrc
 .idea
+Gemfile.lock
