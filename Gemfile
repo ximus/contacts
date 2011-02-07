@@ -5,9 +5,10 @@ gem 'gdata', :platform => [:ruby_18]
 gem 'gdata19', :platform => [:ruby_19]
 gem 'hpricot', '= 0.8.2'
 gem 'encryptor'
+gem 'oauth', '>= 0.4.0'
 
-gem 'linkedin'
-gem 'mechanize'
+#gem 'linkedin'
+#gem 'mechanize'
 
 group :development do
   gem 'jeweler'
