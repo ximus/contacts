@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rob Kaufman"]
-  s.date = %q{2011-02-04}
+  s.date = %q{2011-02-07}
   s.description = %q{A universal interface to grab contact list information from various providers including Outlook, Address Book, Yahoo, AOL, Gmail, Hotmail, and Plaxo.}
   s.email = %q{rob@notch8.com}
   s.extra_rdoc_files = [
@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "Gemfile",
-    "Gemfile.lock",
     "LICENSE",
     "README",
     "Rakefile",
@@ -79,8 +78,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<gdata19>, [">= 0"])
       s.add_runtime_dependency(%q<hpricot>, ["= 0.8.2"])
       s.add_runtime_dependency(%q<encryptor>, [">= 0"])
-      s.add_runtime_dependency(%q<linkedin>, [">= 0"])
-      s.add_runtime_dependency(%q<mechanize>, [">= 0"])
+      s.add_runtime_dependency(%q<oauth>, [">= 0.4.0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
     else
       s.add_dependency(%q<json>, [">= 1.1.1"])
@@ -88,8 +86,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<gdata19>, [">= 0"])
       s.add_dependency(%q<hpricot>, ["= 0.8.2"])
       s.add_dependency(%q<encryptor>, [">= 0"])
-      s.add_dependency(%q<linkedin>, [">= 0"])
-      s.add_dependency(%q<mechanize>, [">= 0"])
+      s.add_dependency(%q<oauth>, [">= 0.4.0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
     end
   else
@@ -98,8 +95,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<gdata19>, [">= 0"])
     s.add_dependency(%q<hpricot>, ["= 0.8.2"])
     s.add_dependency(%q<encryptor>, [">= 0"])
-    s.add_dependency(%q<linkedin>, [">= 0"])
-    s.add_dependency(%q<mechanize>, [">= 0"])
+    s.add_dependency(%q<oauth>, [">= 0.4.0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
   end
 end
