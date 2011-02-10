@@ -1,3 +1,8 @@
+require 'rubygems'
+require 'bundler/setup'
+
+Bundler.require(:default, :test) if defined?(Bundler)
+
 dir = File.dirname(__FILE__)
 $LOAD_PATH.unshift(dir + "/../lib/")
 require 'test/unit'
@@ -22,11 +27,11 @@ class TestAccounts
     
     accounts = {}
     YAML::load(File.open(file)).each do |type, contents|
-      contacts = contents["contacts"].collect {|contact| [contact["name"], contact["email_address"]]}
-      accounts[type.to_sym] = Account.new(type.to_sym, contents["username"], contents["password"], contacts)
+      contacts = contents["contacts"].collect {|contact| [contact["name"], (contact["email_address"] || contact["account_id"])]} if contents["contacts"]
+      accounts[type.to_sym] = Account.new(type.to_sym, contents["username"], contents["password"], contacts, contents["app_id"], contents["app_secret"])
     end
     accounts
   end
 
-  Account = Struct.new :type, :username, :password, :contacts
+  Account = Struct.new :type, :username, :password, :contacts, :app_id, :app_secret
 end

@@ -8,7 +8,7 @@ gem 'encryptor'
 gem 'oauth', '>= 0.4.0'
 
 #gem 'linkedin'
-#gem 'mechanize'
+gem 'mini_fb', :group => :facebook
 
 group :development do
   gem 'jeweler'
