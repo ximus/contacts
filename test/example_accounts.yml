@@ -48,3 +48,26 @@ mailru:
     -
       name: "FirstName2 LastName2"
       email_address: "firstname2@example.com"
+facebook:
+  username: <facebook uid> 
+  password: <access token from facebook app oauth2>
+  contacts:
+    -
+      name: "FirstName1 LastName1"
+      account_id: "facebook_uid"
+    -
+      name: "FirstName2 LastName2"
+      account_id: "facebook_uid"
+linked_in:
+  username: <oauth token for user> 
+  password: <oauth secret for user> 
+  app_id: <consumer token from linked_in app> 
+  app_secret: <consumer secret from linked_in app> 
+  contacts:
+    -
+      name: "FirstName1 LastName1"
+      account_id: "linked_in_uid"
+    -
+      name: "FirstName2 LastName2"
+      account_id: "linked_in_uid"
+

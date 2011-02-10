@@ -2,7 +2,6 @@ require 'mini_fb'
 
 class Contacts
   class Facebook < Base
-    attr_reader :fb_pass, :fb_user
 
     def contacts
       return @contacts if @contacts
