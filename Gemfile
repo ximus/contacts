@@ -7,10 +7,10 @@ gem 'hpricot', '= 0.8.2'
 gem 'encryptor'
 gem 'oauth', '>= 0.4.0'
 
-gem 'mini_fb', :group => :facebook
+gem 'mini_fb'
 
 # Need this from git so we don't end up in dependency hell with oauth
-gem "linkedin", :group => :linkedin, :git => "https://github.com/pengwynn/linkedin.git"
+gem "linkedin", :git => "https://github.com/pengwynn/linkedin.git"
 
 
 group :development do
