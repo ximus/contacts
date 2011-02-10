@@ -1,20 +1,24 @@
-require 'mini_fb'
+begin
+  require 'mini_fb'
+rescue LoadError
+  puts "No facebook gem, so no facebook"
+else
+  class Contacts
+    class Facebook < Base
 
-class Contacts
-  class Facebook < Base
+      def contacts
+        return @contacts if @contacts
+      end
 
-    def contacts
-      return @contacts if @contacts
+
+      def real_connect
+        f = MiniFB.get(@password, @login, :type => "friends")
+        raise "Didn't find users" unless f.data
+        @contacts = f.data.map do |hashie| hashie.values end
+      rescue Exception => e
+        raise AuthenticationError, "Facebook authentication failed"
+      end
     end
-
-
-    def real_connect
-      f = MiniFB.get(@password, @login, :type => "friends")
-      raise "Didn't find users" unless f.data
-      @contacts = f.data.map do |hashie| hashie.values end
-    rescue Exception => e
-      raise AuthenticationError, "Facebook authentication failed"
-    end
+    TYPES[:facebook] = Facebook
   end
-  TYPES[:facebook] = Facebook
 end

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rob Kaufman"]
-  s.date = %q{2011-02-07}
+  s.date = %q{2011-02-10}
   s.description = %q{A universal interface to grab contact list information from various providers including Outlook, Address Book, Yahoo, AOL, Gmail, Hotmail, and Plaxo.}
   s.email = %q{rob@notch8.com}
   s.extra_rdoc_files = [
@@ -29,9 +29,11 @@ Gem::Specification.new do |s|
     "lib/contacts.rb",
     "lib/contacts/aol_importer.rb",
     "lib/contacts/base.rb",
+    "lib/contacts/facebook.rb",
     "lib/contacts/gmail.rb",
     "lib/contacts/hotmail.rb",
     "lib/contacts/json_picker.rb",
+    "lib/contacts/linked_in.rb",
     "lib/contacts/mailru.rb",
     "lib/contacts/outlook.rb",
     "lib/contacts/plaxo.rb",
@@ -39,10 +41,11 @@ Gem::Specification.new do |s|
     "lib/contacts/yahoo.rb",
     "test/example_accounts.yml",
     "test/test_helper.rb",
-    "test/test_suite.rb",
     "test/unit/aol_contact_importer_test.rb",
+    "test/unit/facebook_contact_importer_test.rb",
     "test/unit/gmail_contact_importer_test.rb",
     "test/unit/hotmail_contact_importer_test.rb",
+    "test/unit/linked_in_contact_importer_test.rb",
     "test/unit/mailru_contact_importer_test.rb",
     "test/unit/outlook_test.rb",
     "test/unit/test_accounts_test.rb",
@@ -57,10 +60,11 @@ Gem::Specification.new do |s|
   s.test_files = [
     "examples/grab_contacts.rb",
     "test/test_helper.rb",
-    "test/test_suite.rb",
     "test/unit/aol_contact_importer_test.rb",
+    "test/unit/facebook_contact_importer_test.rb",
     "test/unit/gmail_contact_importer_test.rb",
     "test/unit/hotmail_contact_importer_test.rb",
+    "test/unit/linked_in_contact_importer_test.rb",
     "test/unit/mailru_contact_importer_test.rb",
     "test/unit/outlook_test.rb",
     "test/unit/test_accounts_test.rb",
