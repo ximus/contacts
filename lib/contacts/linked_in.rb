@@ -1,7 +1,7 @@
 begin
-  require 'linkedin'
+  require 'oauth'
 rescue LoadError
-  puts "No linked_in gem, so no linked_in"
+  puts "No oauth gem, so no linked_in"
 else
   class Contacts
     class LinkedIn < Base
@@ -12,13 +12,15 @@ else
 
 
       def real_connect
-        client = ::LinkedIn::Client.new(@options[:app_id], @options[:app_secret])
-        client.authorize_from_access(@login, @password)
-        contacts = client.connections
-        raise "Didn't find users" unless contacts 
+        consumer = OAuth::Consumer.new(@options[:app_id], @options[:app_secret])
+        access_token = OAuth::AccessToken.new(consumer, @login, @password)
+        raw_connections = access_token.get("http://api.linkedin.com/v1/people/~/connections", 'x-li-format' => 'json').body
+        parsed_connections = JSON.parse(raw_connections)
+        raise "Didn't find users" unless parsed_connections["values"] && parsed_connections["values"].count > 0
+        contacts = parsed_connections["values"]
 
         @contacts = contacts.map do |contact|
-          ["#{contact.first_name} #{contact.last_name}", contact.id]
+          ["#{contact["firstName"]} #{contact["lastName"]}", contact["id"]]
         end
       rescue Exception => e
         raise AuthenticationError, "linked_in authentication failed"
