@@ -1,7 +1,7 @@
 begin
   require 'mini_fb'
 rescue LoadError
-  puts "No facebook gem, so no facebook"
+  puts "Contact Gem: No mini_fb gem, so no facebook"
 else
   class Contacts
     class Facebook < Base
